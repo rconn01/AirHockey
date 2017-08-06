@@ -56,7 +56,7 @@ public class Puck {
     }
 
     public boolean collisionP2(){
-        if(game.puck.getBounds().intersects(game.racketP1.getBounds())){
+        if(game.puck.getBounds().intersects(game.racketP2.getBounds())){
             return true;
         }
         else{
