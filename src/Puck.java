@@ -7,12 +7,15 @@ import java.util.Random;
 public class Puck {
     //diameter of the puck
     private static final int DIAMETER = 50;
+
     //x - initial x location of puck
     //y - initial y location of puck
     int x = 1, y = 1, z = 1;
+
     //changes the location of the puck every time it moves
     //based on if it has a collision or not.
     int Wx = 5, Hy = 5, Z = 5;
+
     //creates instance AirHockey game
     private AirHockeyGame game;
     Random rand = new Random();
@@ -33,6 +36,8 @@ public class Puck {
         //when it hits the right wall moves in negative direction (left)
         if(x + Wx > game.getWidth() - DIAMETER)
             Wx = -game.speed;
+
+
         //when it hits the top the game ends
         if(y + Hy > game.getHeight() - DIAMETER)
             game.gameOver();
@@ -40,49 +45,39 @@ public class Puck {
         if(y == 0)
             game.gameOver();
 
+
         //HONESTLY I HAVE NO IDEA WHAT THE z IS BUT IT WORKS SO IM NOT COMPLAINING!
         if(collisionP2()) {
             Hy = 1;
-            //y = game.racketP1.getTopY() - DIAMETER;
             z = game.racketP2.getBottomY() - DIAMETER;
-            //game.speed = rand.nextInt(5);
+            Wx = rand.nextInt(5);
         }
 
         if (collisionP1()){
             Hy = -1;
             y = game.racketP1.getTopY() - DIAMETER;
-            //z = game.racketP2.getTopY() - DIAMETER;
-            //game.speed += rand.nextInt(5);
-
+            Wx = rand.nextInt(5);
         }
+
+
         //changes the location of the puck
-        x = x + Wx;
-        y = y + Hy;
-        z = z + Z;
+        x += Wx;
+        y += Hy;
+        z += Z;
     }
 
     /**
      * returns true if there is a collision between the racketP1 and the puck
      */
     public boolean collisionP1(){
-        if(game.puck.getBounds().intersects(game.racketP1.getBounds())){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return game.puck.getBounds().intersects(game.racketP1.getBounds());
     }
 
     /**
      * returns true if there is a collision between the racketP2 and the puck
      */
     public boolean collisionP2(){
-        if(game.puck.getBounds().intersects(game.racketP2.getBounds())){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return game.puck.getBounds().intersects(game.racketP2.getBounds());
     }
 
     /**
