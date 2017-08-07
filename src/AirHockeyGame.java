@@ -9,9 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-/**
- * Created by srome on 8/5/2017.
- */
+
 public class AirHockeyGame extends JPanel implements KeyListener{
     Puck puck = new Puck(this);
     Player1 racketP1 = new Player1(this);
@@ -21,11 +19,20 @@ public class AirHockeyGame extends JPanel implements KeyListener{
     private int getScore(){
         return speed - 1;
     }
+
+    /**
+     * method for making sure when the designated button is pressed an action occurs
+     * @param e event that occurs
+     */
     public void keyPressed(KeyEvent e){
         racketP1.keyPressed(e);
         racketP2.keyPressed(e);
     }
 
+    /**
+     * method
+     * @param e
+     */
     public void keyReleased(KeyEvent e){
         racketP1.keyReleased(e);
         racketP2.keyReleased(e);

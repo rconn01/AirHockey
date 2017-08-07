@@ -1,9 +1,7 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-/**
- * Created by srome on 8/5/2017.
- */
+
 public class Player2 {
     private int X = 250;
     private int score = 0;
@@ -29,10 +27,10 @@ public class Player2 {
 
     public void keyPressed(KeyEvent e){
         if(e.getKeyCode() == KeyEvent.VK_A){
-            Wx = -game.speed;
+            Wx = -4;
         }
         if(e.getKeyCode() == KeyEvent.VK_D){
-            Wx = game.speed;
+            Wx = 4;
         }
     }
 

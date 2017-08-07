@@ -1,10 +1,9 @@
-/**
- * Created by srome on 8/5/2017.
- */
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 public class Player1 {
     private int X = 250;
@@ -31,10 +30,10 @@ public class Player1 {
 
     public void keyPressed(KeyEvent e){
         if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            Wx = -game.speed;
+            Wx = -4;
         }
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            Wx = game.speed;
+            Wx = 4;
         }
     }
 
