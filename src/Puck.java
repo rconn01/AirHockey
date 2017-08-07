@@ -1,7 +1,8 @@
 /**
  * Created by srome on 8/5/2017.
+ *
+ * Edits by bconn.
  */
-
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -46,6 +47,7 @@ public class Puck {
         y = y + Hy;
         z = z + Z;
     }
+
     public boolean collisionP1(){
         if(game.puck.getBounds().intersects(game.racketP1.getBounds())){
             return true;
@@ -67,6 +69,7 @@ public class Puck {
     private Rectangle getBounds(){
         return new Rectangle(x, y, DIAMETER, DIAMETER);
     }
+
     public void paint(Graphics2D g2d){
         g2d.setColor(Color.BLACK);
         g2d.fillOval(x, y, 50, 50);

@@ -1,3 +1,8 @@
+/**
+ * Created by srome on 8/5/2017.
+ *
+ * Edits by bconn.
+ */
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -9,9 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-/**
- * Created by srome on 8/5/2017.
- */
+
 public class AirHockeyGame extends JPanel implements KeyListener{
     Puck puck = new Puck(this);
     Player1 racketP1 = new Player1(this);
@@ -21,6 +24,7 @@ public class AirHockeyGame extends JPanel implements KeyListener{
     private int getScore(){
         return speed - 1;
     }
+
     public void keyPressed(KeyEvent e){
         racketP1.keyPressed(e);
         racketP2.keyPressed(e);
