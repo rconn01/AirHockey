@@ -1,8 +1,3 @@
-/**
- * Created by srome on 8/5/2017.
- *
- * Edits by bconn.
- */
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -25,11 +20,19 @@ public class AirHockeyGame extends JPanel implements KeyListener{
         return speed - 1;
     }
 
+    /**
+     * method for making sure when the designated button is pressed an action occurs
+     * @param e event that occurs
+     */
     public void keyPressed(KeyEvent e){
         racketP1.keyPressed(e);
         racketP2.keyPressed(e);
     }
 
+    /**
+     * method
+     * @param e
+     */
     public void keyReleased(KeyEvent e){
         racketP1.keyReleased(e);
         racketP2.keyReleased(e);
