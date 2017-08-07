@@ -25,7 +25,7 @@ public class Puck {
             Hy = game.speed;
         if(y + Hy > game.getHeight() - DIAMETER)
             game.gameOver();
-        if(game.getHeight() - DIAMETER < 0)
+        if(y == 0)
             game.gameOver();
 
         if(collisionP2()) {

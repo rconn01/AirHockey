@@ -57,7 +57,7 @@ public class AirHockeyGame extends JPanel implements KeyListener{
     }
 
     public void gameOver(){
-        JOptionPane.showMessageDialog(this, "Player1 score is: " + racketP1.getScore(), "Game Over", JOptionPane.YES_NO_OPTION);
+        JOptionPane.showMessageDialog(this, "Player1 score is: " + racketP1.getScore() + "\nPlayer2 score is: " + racketP2.getScore(), "Game Over", JOptionPane.YES_NO_OPTION);
         System.exit(ABORT);
     }
 
