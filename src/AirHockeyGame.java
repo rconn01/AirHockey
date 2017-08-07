@@ -68,7 +68,7 @@ public class AirHockeyGame extends JPanel implements KeyListener{
         System.exit(ABORT);
     }
 
-    public static void main(String[] args) throws InterruptedException{
+    public void start() {
         JFrame frame = new JFrame("Air Hockey Game");
         frame.setSize(500, 500);
         AirHockeyGame myGame = new AirHockeyGame();
@@ -79,7 +79,11 @@ public class AirHockeyGame extends JPanel implements KeyListener{
         while(true){
             myGame.gameMoves();
             myGame.repaint();
-            Thread.sleep(20);
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
     @Override
