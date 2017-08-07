@@ -16,10 +16,6 @@ public class AirHockeyGame extends JPanel implements KeyListener{
     Player2 racketP2 = new Player2(this);
     int speed = 1;
 
-    private int getScore(){
-        return speed - 1;
-    }
-
     /**
      * method for making sure when the designated button is pressed an action occurs
      * @param e event that occurs
