@@ -1,3 +1,5 @@
+
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -10,40 +12,42 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
-public class AirHockeyGame extends JPanel implements KeyListener{
+public class AirHockeyGame extends JPanel implements KeyListener {
     Puck puck = new Puck(this);
     Player1 racketP1 = new Player1(this);
     Player2 racketP2 = new Player2(this);
     int speed = 1;
 
-    private int getScore(){
+    private int getScore() {
         return speed - 1;
     }
 
     /**
      * method for making sure when the designated button is pressed an action occurs
+     *
      * @param e event that occurs
      */
-    public void keyPressed(KeyEvent e){
+    public void keyPressed(KeyEvent e) {
         racketP1.keyPressed(e);
         racketP2.keyPressed(e);
     }
 
     /**
      * method
+     *
      * @param e
      */
-    public void keyReleased(KeyEvent e){
+    public void keyReleased(KeyEvent e) {
         racketP1.keyReleased(e);
         racketP2.keyReleased(e);
     }
 
-    public AirHockeyGame(){
+    public AirHockeyGame() {
         addKeyListener(this);
         setFocusable(true);
     }
 
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
         puck.paint(g2d);
@@ -57,18 +61,19 @@ public class AirHockeyGame extends JPanel implements KeyListener{
         g2d.drawString(String.valueOf(racketP1.getScore()), 10, 415);
     }
 
-    public void gameMoves(){
+    public void gameMoves() {
         racketP1.move();
         racketP2.move();
         puck.move();
     }
 
-    public void gameOver(){
+    public void gameOver() {
         JOptionPane.showMessageDialog(this, "Player1 score is: " + racketP1.getScore() + "\nPlayer2 score is: " + racketP2.getScore(), "Game Over", JOptionPane.YES_NO_OPTION);
         System.exit(ABORT);
     }
 
-    public static void main(String[] args) throws InterruptedException{
+
+    public void start(){
         JFrame frame = new JFrame("Air Hockey Game");
         frame.setSize(500, 500);
         AirHockeyGame myGame = new AirHockeyGame();
@@ -79,13 +84,17 @@ public class AirHockeyGame extends JPanel implements KeyListener{
         while(true){
             myGame.gameMoves();
             myGame.repaint();
-            Thread.sleep(20);
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
-    @Override
-    public void keyTyped(KeyEvent e) {
+        @Override
+        public void keyTyped (KeyEvent e){
 
-    }
+        }
 }
 
 

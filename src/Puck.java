@@ -10,8 +10,7 @@ public class Puck {
     //x - initial x location of puck
     //y - initial y location of puck
     int x = 1, y = 1, z = 1;
-    //changes the location of the puck every time it moves
-    //based on if it has a collision or not.
+    //speed and direction
     int Wx = 5, Hy = 5, Z = 5;
     //creates instance AirHockey game
     private AirHockeyGame game;
@@ -55,7 +54,6 @@ public class Puck {
             //game.speed += rand.nextInt(5);
 
         }
-        //changes the location of the puck
         x = x + Wx;
         y = y + Hy;
         z = z + Z;
