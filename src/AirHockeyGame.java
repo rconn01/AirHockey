@@ -72,7 +72,7 @@ public class AirHockeyGame extends JPanel implements KeyListener{
         while(true){
             myGame.gameMoves();
             myGame.repaint();
-            Thread.sleep(10);
+            Thread.sleep(20);
         }
     }
     @Override
