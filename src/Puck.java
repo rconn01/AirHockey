@@ -40,7 +40,7 @@ public class Puck {
         if(y == 0)
             game.gameOver();
 
-        //HONESTLY I HAVE NO IDEA WHAT THE z IS BUT IT WORKS SO IM NOT COMPLAINING! :)
+        //HONESTLY I HAVE NO IDEA WHAT THE z IS BUT IT WORKS SO IM NOT COMPLAINING!
         if(collisionP2()) {
             Hy = 1;
             //y = game.racketP1.getTopY() - DIAMETER;
