@@ -16,13 +16,22 @@ public class Puck {
     //based on if it has a collision or not.
     int Wx = 5, Hy = 5, Z = 5;
 
+    private final int WINNER = 7;
+    private final int SPEED = 20;
+
+    private Player1 player1;
+    private Player2 player2;
+
     //creates instance AirHockey game
     private AirHockeyGame game;
     Random rand = new Random();
 
     public Puck(AirHockeyGame game){
         this.game = game;
+        this.player1 = game.getPlayer1();
+        this.player2 = game.getPlayer2();
     }
+
 
     /**
      * controls the pucks movements as it collides with the walls and the rackets.
@@ -32,31 +41,37 @@ public class Puck {
     public void move(){
         //when it hits the left wall moves in positive direction (right)
         if(x + Wx < 0)
-            Wx = game.speed;
+            Wx = rand.nextInt(SPEED);
         //when it hits the right wall moves in negative direction (left)
-        if(x + Wx > game.getWidth() - DIAMETER)
-            Wx = -game.speed;
+        else if(x + Wx > game.getWidth() - DIAMETER)
+            Wx = -rand.nextInt(SPEED);
 
 
         //when it hits the top the game ends
-        if(y + Hy > game.getHeight() - DIAMETER)
-            game.gameOver();
+        if(collideTop()) {
+            if(player1.theScore() == WINNER)
+                game.gameOver();
+            game.restart(game);
+        }
         //when it hits the bottom game ends
-        if(y == 0)
-            game.gameOver();
+        else if(collideBottom()) {
+            if(player2.theScore() == WINNER)
+                game.gameOver();
+            game.restart(game);
+        }
 
 
         //HONESTLY I HAVE NO IDEA WHAT THE z IS BUT IT WORKS SO IM NOT COMPLAINING!
         if(collisionP2()) {
             Hy = 1;
             z = game.racketP2.getBottomY() - DIAMETER;
-            Wx = rand.nextInt(5);
+            Wx = rand.nextInt(SPEED);
         }
 
-        if (collisionP1()){
+        else if (collisionP1()){
             Hy = -1;
             y = game.racketP1.getTopY() - DIAMETER;
-            Wx = rand.nextInt(5);
+            Wx = rand.nextInt(SPEED);
         }
 
 
@@ -87,6 +102,13 @@ public class Puck {
         return new Rectangle(x, y, DIAMETER, DIAMETER);
     }
 
+    public boolean collideBottom(){
+        return y + Hy > game.getHeight() - DIAMETER;
+    }
+
+    public boolean collideTop(){
+        return y == 0;
+    }
     /**
      * colors the puck black
      * @param g2d

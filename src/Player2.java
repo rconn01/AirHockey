@@ -39,12 +39,16 @@ public class Player2 {
     }
 
     public int getScore(){
-        if(game.puck.collisionP2()){
+        if(game.puck.collideBottom()){
             return score++;
         }
         else{
             return score;
         }
+    }
+
+    public int theScore(){
+        return score;
     }
 
     public Rectangle getBounds(){

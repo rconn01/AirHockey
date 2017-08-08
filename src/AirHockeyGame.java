@@ -11,10 +11,16 @@ import javax.swing.JPanel;
 
 
 public class AirHockeyGame extends JPanel implements KeyListener{
-    Puck puck = new Puck(this);
+    Puck puck;
     Player1 racketP1 = new Player1(this);
     Player2 racketP2 = new Player2(this);
-    int speed = 1;
+
+    public Player1 getPlayer1(){
+        return racketP1;
+    }
+    public Player2 getPlayer2(){
+        return racketP2;
+    }
 
     /**
      * method for making sure when the designated button is pressed an action occurs
@@ -68,6 +74,7 @@ public class AirHockeyGame extends JPanel implements KeyListener{
         JFrame frame = new JFrame("Air Hockey Game");
         frame.setSize(500, 500);
         AirHockeyGame myGame = new AirHockeyGame();
+        myGame.puck = new Puck(myGame);
         frame.add(myGame);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,6 +84,9 @@ public class AirHockeyGame extends JPanel implements KeyListener{
             myGame.repaint();
             Thread.sleep(20);
         }
+    }
+    public void restart(AirHockeyGame game){
+        puck = new Puck(game);
     }
     @Override
     public void keyTyped(KeyEvent e) {

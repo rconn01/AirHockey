@@ -42,13 +42,18 @@ public class Player1 {
     }
 
     public int getScore(){
-        if(game.puck.collisionP1()){
+        if(game.puck.collideTop()){
             return score++;
         }
         else{
             return score;
         }
     }
+
+    public int theScore(){
+        return score;
+    }
+
     public Rectangle getBounds(){
         return new Rectangle(X, Y, WIDTH, HEIGHT);
     }
