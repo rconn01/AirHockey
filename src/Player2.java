@@ -84,10 +84,8 @@ public class Player2 {
     }
 
     /**
-     * Determines the score at the moment.
-     *
-     * It adds to the score if the puck collided with the
-     * bottom of the screen.
+     * The score at the moment. Needed to stop
+     * double addition to score.
      *
      * @return The current score.
      */
@@ -101,8 +99,7 @@ public class Player2 {
     }
 
     /**
-     * The score at the moment. Needed to stop
-     * double addition to score.
+     * Returns the score.
      *
      * @return The current score.
      */

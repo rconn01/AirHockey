@@ -50,7 +50,9 @@ public class Puck {
     public Puck(AirHockeyGame game){
         this.game = game;
         this.player1 = game.getPlayer1();
-        this.player2 = game.getPlayer2();
+        if(game.getType() == 'D'){
+            this.player2 = game.getPlayer2();
+        }
     }
 
     /**
@@ -66,14 +68,23 @@ public class Puck {
         else if(x + Wx > game.getWidth() - DIAMETER)
             Wx = -speed;
 
-        //when it hits the top the game resets and player 1 gets a point
-        if(collideTop()) {
-            if(player1.theScore() == WINNER)
-                game.gameOver();
-            game.restart(game);
+        switch (game.getType()){
+            case 'S':
+                if(collideTop()) {
+                    Hy = 1;
+                }
+                break;
+            //when it hits the top the game resets and player 1 gets a point
+            case 'D':
+                if(collideTop()) {
+                    if(player1.theScore() == WINNER)
+                        game.gameOver();
+                    game.restart(game);
+                }
+                break;
         }
         //when it hits the bottom the game resets and player 2 gets a point
-        else if(collideBottom()) {
+        if(collideBottom()) {
             if(player2.theScore() == WINNER)
                 game.gameOver();
             game.restart(game);
@@ -81,13 +92,14 @@ public class Puck {
 
         //Sends the puck away from the paddle after collision changes speed randomly
         //adds or subtracts.
-        if(collisionP2()) {
-            Hy = 1;
-            z = player2.getBottomY() - DIAMETER;
-            Wx += rand.nextInt(6);
-            speed = Wx;
+        if(game.getType() == 'D') {
+            if (collisionP2()) {
+                Hy = 1;
+                z = player2.getBottomY() - DIAMETER;
+                Wx += rand.nextInt(6);
+                speed = Wx;
+            }
         }
-
         else if (collisionP1()){
             Hy = -1;
             y = player1.getTopY() - DIAMETER;

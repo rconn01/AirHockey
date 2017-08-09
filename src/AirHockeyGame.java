@@ -20,6 +20,8 @@ public class AirHockeyGame extends JPanel implements KeyListener{
     /** The puck being used to play. */
     public Puck puck;
 
+    private char type;
+
     /** The first player. */
     private Player1 racketP1 = new Player1(this);
 
@@ -41,6 +43,17 @@ public class AirHockeyGame extends JPanel implements KeyListener{
     }
 
     /**
+     * Allows for access to the games puck outside of the file.
+     */
+    public Puck getPuck(){
+        return puck;
+    }
+
+    public char getType(){
+        return type;
+    }
+
+    /**
      * Determines which key is pressed and then acts on the
      * action required.
      *
@@ -48,7 +61,9 @@ public class AirHockeyGame extends JPanel implements KeyListener{
      */
     public void keyPressed(KeyEvent e){
         racketP1.keyPressed(e);
-        racketP2.keyPressed(e);
+        if(getType() == 'D'){
+            racketP2.keyPressed(e);
+        }
     }
 
     /**
@@ -58,15 +73,18 @@ public class AirHockeyGame extends JPanel implements KeyListener{
      */
     public void keyReleased(KeyEvent e){
         racketP1.keyReleased(e);
-        racketP2.keyReleased(e);
+        if(getType() == 'D'){
+            racketP2.keyReleased(e);
+        }
     }
 
     /**
      * Creates the game and sets the listeners and the focuses.
      */
-    public AirHockeyGame(){
+    public AirHockeyGame(char c){
         addKeyListener(this);
         setFocusable(true);
+        this.type = c;
     }
 
     /**
@@ -80,10 +98,12 @@ public class AirHockeyGame extends JPanel implements KeyListener{
         Graphics2D g2d = (Graphics2D) g;
         puck.paint(g2d);
         racketP1.paint(g2d);
-        racketP2.paint(g2d);
-        g2d.setColor(Color.BLUE);
-        g2d.setFont(new Font("Arial", Font.BOLD, 25));
-        g2d.drawString(String.valueOf(racketP2.getScore()), 10, 30);
+        if(getType() == 'D'){
+            racketP2.paint(g2d);
+            g2d.setColor(Color.BLUE);
+            g2d.setFont(new Font("Arial", Font.BOLD, 25));
+            g2d.drawString(String.valueOf(racketP2.getScore()), 10, 30);
+        }
         g2d.setColor(Color.RED);
         g2d.setFont(new Font("Arial", Font.BOLD, 25));
         g2d.drawString(String.valueOf(racketP1.getScore()), 10, 415);
@@ -94,7 +114,9 @@ public class AirHockeyGame extends JPanel implements KeyListener{
      */
     public void gameMoves(){
         racketP1.move();
-        racketP2.move();
+        if(getType() == 'D'){
+            racketP2.move();
+        }
         puck.move();
     }
 
@@ -103,7 +125,10 @@ public class AirHockeyGame extends JPanel implements KeyListener{
      * of both players and then exits the screen.
      */
     public void gameOver(){
-        JOptionPane.showMessageDialog(this, "Player1 score is: " + racketP1.getScore() + "\nPlayer2 score is: " + racketP2.getScore(), "Game Over", JOptionPane.YES_NO_OPTION);
+        if(getType() == 'D')
+            JOptionPane.showMessageDialog(this, "Player1 score is: " + racketP1.getScore() + "\nPlayer2 score is: " + racketP2.getScore(), "Game Over", JOptionPane.YES_NO_OPTION);
+        else if(getType() == 'S')
+            JOptionPane.showMessageDialog(this, "Player1 score is: " + racketP1.getScore() , "Game Over", JOptionPane.YES_NO_OPTION);
         System.exit(ABORT);
     }
 

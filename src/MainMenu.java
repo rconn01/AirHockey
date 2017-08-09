@@ -37,7 +37,10 @@ public class MainMenu {
         Single.setLocation(0,menuY);
         Single.setFont(new Font("Arial", Font.BOLD, 25));
         Menu.add(Single);
-        //Single.addActionListener();
+        Single.addActionListener(e -> {
+                    new Thread(() -> new AirHockeyGame('S').start()).start();
+                    Menu.setVisible(false);
+                });
 
         //Double Button
         Double.setSize(menuWidth,menuHeight);
@@ -46,7 +49,7 @@ public class MainMenu {
         //Double.setBackground(Color.RED);
         Menu.add(Double);
         Double.addActionListener(e -> {
-            new Thread(()-> new AirHockeyGame().start()).start();
+            new Thread(()-> new AirHockeyGame('D').start()).start();
             Menu.setVisible(false);
         });
 

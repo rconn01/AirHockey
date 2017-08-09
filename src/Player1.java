@@ -87,25 +87,22 @@ public class Player1 {
     }
 
     /**
-     * Determines the score at the moment.
-     *
-     * It adds to the score if the puck collided with the
-     * top of the screen.
+     * The score at the moment. Needed to stop
+     * double addition to score.
      *
      * @return The current score.
      */
     public int getScore(){
-        if(game.puck.collideTop()){
+        if(game.puck.collideTop() && game.getType() == 'D')
             return score++;
-        }
-        else{
+        else if(game.getType() == 'S' && game.getPuck().collisionP1())
+            return score++;
+        else
             return score;
-        }
     }
 
     /**
-     * The score at the moment. Needed to stop
-     * double addition to score.
+     * Returns the score.
      *
      * @return The current score.
      */
