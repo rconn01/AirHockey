@@ -55,6 +55,7 @@ public class Puck {
         }
     }
 
+
     /**
      * Controls the pucks movements as it collides with the walls and the rackets.
      * '- DIAMETER' because want the edge of puck to hit wall not center. Changes location
@@ -91,12 +92,18 @@ public class Puck {
         }
 
         //Sends the puck away from the paddle after collision changes speed randomly
-        //adds or subtracts.
+        //adds for player 2, subtracts for player 1.
         if(game.getType() == 'D') {
             if (collisionP2()) {
                 Hy = 1;
                 z = player2.getBottomY() - DIAMETER;
                 Wx += rand.nextInt(6);
+                speed = Wx;
+            }
+            if(collisionP1()){
+                Hy = -1;
+                y = player1.getTopY() - DIAMETER;
+                Wx -= rand.nextInt(6);
                 speed = Wx;
             }
         }
