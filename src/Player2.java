@@ -9,13 +9,14 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class Player2 {
-    /** You need to fill these out */
+    /** Starting x location of the paddle */
     private int X = 250;
 
     /** The score of the player. */
     private int score = 0;
 
-    /** You need to fill these out */
+    /** Allows player location to be along y axis at 0.
+     * Does not move up and down only along this axis */
     private static final int Y = 0;
 
     /** The width of the players paddle. */
@@ -40,7 +41,7 @@ public class Player2 {
     }
 
     /**
-     * Colors the paddle red.
+     * Colors the paddle Blue.
      *
      * @param g The paddle being changed.
      */
@@ -119,7 +120,7 @@ public class Player2 {
     }
 
     /**
-     * Returns the value of Y minus the height of the paddle.
+     * Returns the value of the location of the bottom of the paddle for player 2.
      *
      * @return The value of Y minus the height of the paddle.
      */

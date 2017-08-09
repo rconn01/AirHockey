@@ -12,13 +12,14 @@ import java.awt.event.KeyEvent;
 import java.util.Random;
 
 public class Player1 {
-    /** You need to fill these out */
+    /** Starting location of players paddle */
     private int X = 250;
 
     /** The score of the player. */
     private int score = 0;
 
-    /** You need to fill these out */
+    /** Allows paddle to stay on the y axis value of 398.
+     * Does not move up and down only along this axis. */
     private static final int Y = 398;
 
     /** The width of the players paddle. */
@@ -122,7 +123,7 @@ public class Player1 {
     }
 
     /**
-     * Returns the value of Y.
+     * Returns the value of the location of the top of the paddle for player 1.
      *
      * @return The value of Y.
      */

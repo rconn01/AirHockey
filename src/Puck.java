@@ -27,8 +27,8 @@ public class Puck {
     /** WINNER is the number of goals required to win */
     private final int WINNER = 7;
 
-    /** SPEED is the speed of the puck for the x and y directions */
-    private final int SPEED = 20;
+    /** the speed of the puck for the x and y directions */
+    private int speed = 5;
 
     /** player1 is the first player */
     private Player1 player1;
@@ -61,10 +61,10 @@ public class Puck {
     public void move(){
         //when it hits the left wall moves in positive direction (right)
         if(x + Wx < 0)
-            Wx = rand.nextInt(SPEED);
+            Wx = speed;
         //when it hits the right wall moves in negative direction (left)
         else if(x + Wx > game.getWidth() - DIAMETER)
-            Wx = -rand.nextInt(SPEED);
+            Wx = -speed;
 
         //when it hits the top the game resets and player 1 gets a point
         if(collideTop()) {
@@ -79,17 +79,20 @@ public class Puck {
             game.restart(game);
         }
 
-        //Sends the puck away from the paddle after collision
+        //Sends the puck away from the paddle after collision changes speed randomly
+        //adds or subtracts.
         if(collisionP2()) {
             Hy = 1;
-            z = game.racketP2.getBottomY() - DIAMETER;
-            Wx = rand.nextInt(SPEED);
+            z = player2.getBottomY() - DIAMETER;
+            Wx += rand.nextInt(6);
+            speed = Wx;
         }
 
         else if (collisionP1()){
             Hy = -1;
-            y = game.racketP1.getTopY() - DIAMETER;
-            Wx = rand.nextInt(SPEED);
+            y = player1.getTopY() - DIAMETER;
+            Wx -= rand.nextInt(5);
+            speed = Wx;
         }
 
         //changes the location of the puck
@@ -104,7 +107,7 @@ public class Puck {
      * @return If the puck collides with the first players paddle.
      */
     public boolean collisionP1(){
-        return game.puck.getBounds().intersects(game.racketP1.getBounds());
+        return game.puck.getBounds().intersects(player1.getBounds());
     }
 
     /**
@@ -113,7 +116,7 @@ public class Puck {
      * @return If the puck collides with the second players paddle.
      */
     public boolean collisionP2(){
-        return game.puck.getBounds().intersects(game.racketP2.getBounds());
+        return game.puck.getBounds().intersects(player2.getBounds());
     }
 
     /**

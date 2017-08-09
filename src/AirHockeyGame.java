@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 
 public class AirHockeyGame extends JPanel implements KeyListener{
     /** The puck being used to play. */
-    private Puck puck;
+    public Puck puck;
 
     /** The first player. */
     private Player1 racketP1 = new Player1(this);
@@ -110,25 +110,25 @@ public class AirHockeyGame extends JPanel implements KeyListener{
     /* This could use your better explanation in comments through it. */
     /**
      * Creates a screen than plays the game out on it.
-     * @param args
+     //@param args
      * @throws InterruptedException
      */
     //public static void main(String[] args) throws InterruptedException{
     public void start() {
         JFrame frame = new JFrame("Air Hockey Game");
         frame.setSize(500, 500);
-        AirHockeyGame myGame = new AirHockeyGame();
-        frame.add(myGame);
+        this.puck = new Puck(this);
+        frame.add(this);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         while(true){
-            myGame.gameMoves();
-            myGame.repaint();
+            this.gameMoves();
+            this.repaint();
             try {
-                Thread.sleep(50);
+                Thread.sleep(20);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
     }
@@ -143,7 +143,6 @@ public class AirHockeyGame extends JPanel implements KeyListener{
         puck = new Puck(game);
     }
 
-    /* Do we need this???? */
     @Override
     public void keyTyped(KeyEvent e) {
 
