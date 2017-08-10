@@ -10,7 +10,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -120,6 +119,7 @@ public class AirHockeyGame extends JPanel implements KeyListener{
         puck = new Puck(game);
     }
 
+
     /**
      * Reports that the game has ended in a popup window, with the score
      * of both players and then exits the screen.
@@ -136,11 +136,10 @@ public class AirHockeyGame extends JPanel implements KeyListener{
         System.exit(ABORT);
     }
 
-    /* This could use your better explanation in comments through it. */
     /**
-     * Creates a screen than plays the game out on it.
-     //@param args
-     * @throws InterruptedException
+     * Used in MainMenu to create the game board and the puck.
+     * Continuously repaints the game board while puck and paddles move around.
+     * @throws InterruptedException for the thread that is running
      */
     public void start(){
         this.puck = new Puck(this);
