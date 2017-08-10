@@ -18,8 +18,9 @@ import javax.swing.JPanel;
 
 public class AirHockeyGame extends JPanel implements KeyListener{
     /** The puck being used to play. */
-    public Puck puck;
+    private Puck puck;
 
+    /** Determines if it is single or double player. */
     private char type;
 
     /** The first player. */
@@ -29,26 +30,37 @@ public class AirHockeyGame extends JPanel implements KeyListener{
     private Player2 racketP2 = new Player2(this);
 
     /**
-     * Allows for access to the games first player outside of the file.
+     * Returns the first player.
+     *
+     * @return The first player.
      */
     public Player1 getPlayer1(){
         return racketP1;
     }
 
     /**
-     * Allows for access to the games second player outside of the file.
+     * Returns the second player.
+     *
+     * @return The second player.
      */
     public Player2 getPlayer2(){
         return racketP2;
     }
 
     /**
-     * Allows for access to the games puck outside of the file.
+     * Returns the puck.
+     *
+     * @return The puck.
      */
     public Puck getPuck(){
         return puck;
     }
 
+    /**
+     * Returns the type of the game. S - Single D - Double.
+     *
+     * @return The type of the game.
+     */
     public char getType(){
         return type;
     }
@@ -88,6 +100,66 @@ public class AirHockeyGame extends JPanel implements KeyListener{
     }
 
     /**
+     * Starts both paddles and the puck moving.
+     */
+    public void gameMoves(){
+        racketP1.move();
+        if(getType() == 'D'){
+            racketP2.move();
+        }
+        puck.move();
+    }
+
+    /**
+     * Restarts the puck, used to let the game run
+     * until a score is met.
+     *
+     * @param game The game being played.
+     */
+    public void restart(AirHockeyGame game){
+        puck = new Puck(game);
+    }
+
+    /**
+     * Reports that the game has ended in a popup window, with the score
+     * of both players and then exits the screen.
+     */
+    public void gameOver(){
+        switch (getType()){
+            case 'D':
+                JOptionPane.showMessageDialog(this, "Player 1 score is: " + racketP1.theScore() + "\nPlayer 2 score is: " + racketP2.theScore(), "Game Over", JOptionPane.YES_NO_OPTION);
+                break;
+            case 'S':
+                JOptionPane.showMessageDialog(this, "Players score is: " + racketP1.theScore() , "Game Over", JOptionPane.YES_NO_OPTION);
+                break;
+        }
+        System.exit(ABORT);
+    }
+
+    /* This could use your better explanation in comments through it. */
+    /**
+     * Creates a screen than plays the game out on it.
+     //@param args
+     * @throws InterruptedException
+     */
+    public void start(){
+        this.puck = new Puck(this);
+        JFrame frame = new JFrame("Air Hockey Game");
+        frame.setSize(500, 500);
+        frame.add(this);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        while(true){
+            this.gameMoves();
+            this.repaint();
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {}
+        }
+    }
+
+    /**
      * Sets the coloring of the puck, and both paddles.
      * Sets the coloring and fonts of both scores.
      *
@@ -109,69 +181,9 @@ public class AirHockeyGame extends JPanel implements KeyListener{
         g2d.drawString(String.valueOf(racketP1.getScore()), 10, 415);
     }
 
-    /**
-     * Starts both paddles and the puck moving.
-     */
-    public void gameMoves(){
-        racketP1.move();
-        if(getType() == 'D'){
-            racketP2.move();
-        }
-        puck.move();
-    }
-
-    /**
-     * Reports that the game has ended in a popup window, with the score
-     * of both players and then exits the screen.
-     */
-    public void gameOver(){
-        if(getType() == 'D')
-            JOptionPane.showMessageDialog(this, "Player1 score is: " + racketP1.getScore() + "\nPlayer2 score is: " + racketP2.getScore(), "Game Over", JOptionPane.YES_NO_OPTION);
-        else if(getType() == 'S')
-            JOptionPane.showMessageDialog(this, "Player1 score is: " + racketP1.getScore() , "Game Over", JOptionPane.YES_NO_OPTION);
-        System.exit(ABORT);
-    }
-
-    /* This could use your better explanation in comments through it. */
-    /**
-     * Creates a screen than plays the game out on it.
-     //@param args
-     * @throws InterruptedException
-     */
-    //public static void main(String[] args) throws InterruptedException{
-    public void start() {
-        JFrame frame = new JFrame("Air Hockey Game");
-        frame.setSize(500, 500);
-        this.puck = new Puck(this);
-        frame.add(this);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        while(true){
-            this.gameMoves();
-            this.repaint();
-            try {
-                Thread.sleep(20);
-            } catch (InterruptedException e) {
-                //e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Restarts the puck, used to let the game run
-     * until a score is met.
-     *
-     * @param game The game being played.
-     */
-    public void restart(AirHockeyGame game){
-        puck = new Puck(game);
-    }
-
+    /* Needed for KeyListener */
     @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
+    public void keyTyped(KeyEvent e) {}
 }
 
 

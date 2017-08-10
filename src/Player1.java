@@ -31,7 +31,7 @@ public class Player1 {
     /** The game being played. */
     private AirHockeyGame game;
 
-    /** The movement speed of the paddle at the start. */
+    /** The initial speed of the paddle. */
     private int Wx = 0;
 
     /**
@@ -68,11 +68,13 @@ public class Player1 {
      * @param e The key pressed.
      */
     public void keyPressed(KeyEvent e){
-        if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            Wx = -4;
-        }
-        else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            Wx = 4;
+        switch (e.getKeyCode()){
+            case (KeyEvent.VK_LEFT):
+                Wx = -4;
+                break;
+            case (KeyEvent.VK_RIGHT):
+                Wx = 4;
+                break;
         }
     }
 
@@ -93,12 +95,17 @@ public class Player1 {
      * @return The current score.
      */
     public int getScore(){
-        if(game.puck.collideTop() && game.getType() == 'D')
-            return score++;
-        else if(game.getType() == 'S' && game.getPuck().collisionP1())
-            return score++;
-        else
-            return score;
+        switch (game.getType()){
+            case 'D':
+                if(game.getPuck().collideTop())
+                    return score++;
+                break;
+            case 'S':
+                if(game.getPuck().collideP1())
+                    return score++;
+                break;
+        }
+        return score;
     }
 
     /**
