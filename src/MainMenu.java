@@ -11,8 +11,8 @@ public class MainMenu {
     JButton Single = new JButton("Single");
     JButton Double = new JButton("Double");
     JButton Exit = new JButton("Exit");
-    ImageIcon pic = new ImageIcon("redblue.png");
-    JLabel imageLabel = new JLabel(pic);
+    JLabel label = new JLabel("Air Hockey", SwingConstants.CENTER);
+    JTextArea rules = new JTextArea("Rules: " + "\nFor doubles try and be the first to 7 points"  + "\nFor single player, try and get the highest amount of " + "\npoints without the ball hitting the bottom.");
 
     int menuWidth = 166;//size of each button
     int menuHeight = 60;//width of each button
@@ -22,7 +22,7 @@ public class MainMenu {
     int Height = 300;
 
     /**
-     * Creates the main menu with 2 buttons and displays main picture
+     * Creates the main menu with 2 buttons and displays main rules
      */
     public MainMenu() {
         //Menu Variables
@@ -43,7 +43,7 @@ public class MainMenu {
                 });
 
         //Double Button
-        Double.setSize(menuWidth,menuHeight);
+        Double.setSize(menuWidth, menuHeight);
         Double.setLocation(171, menuY);
         Double.setFont(new Font("Arial", Font.BOLD, 25));
         //Double.setBackground(Color.RED);
@@ -54,18 +54,24 @@ public class MainMenu {
         });
 
         //Exit Button Variables
-        Exit.setSize(menuWidth,menuHeight);
+        Exit.setSize(menuWidth, menuHeight);
         Exit.setLocation(342,menuY);
         Exit.setFont(new Font("Arial", Font.BOLD, 25));
         //Exit.setBackground(Color.BLUE);
         Menu.add(Exit);
         Exit.addActionListener(e -> System.exit(0));
 
-        //Display Picture
-        Menu.add(imageLabel);
-        imageLabel.setBounds(0,0,320,166);
-        imageLabel.setVisible(true);
-        //Menu.setBackground(Color.BLACK);
+        //Display label
+        //label.setSize(menuWidth, menuHeight);
+        //label.setLocation(-250, 0);
+        label.setFont(new Font("Stencil", Font.ITALIC, 30));
+        Menu.add(label);
+
+        //Rules Label
+        rules.setLocation(250, 150);
+        rules.setFont(new Font("Arial", Font.PLAIN, 20));
+        Menu.add(rules);
+
         Menu.setVisible(true);
 
     }
