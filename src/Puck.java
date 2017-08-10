@@ -64,11 +64,8 @@ public class Puck {
      * of the puck constantly
      */
     public void move(){
-        //when it hits the left wall moves in positive direction (right)
-        if(collideLeft())
-            Wx *= -1;
-        //when it hits the right wall moves in negative direction (left)
-        else if(collideRight())
+        //Rebounds the puck after it hits a side wall.
+        if(collideLeft() || collideRight())
             Wx *= -1;
 
         switch (game.getType()){
