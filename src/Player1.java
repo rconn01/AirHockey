@@ -5,6 +5,8 @@
  * to move, collide with the puck, and keep score.
  */
 
+import sun.applet.Main;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -70,11 +72,16 @@ public class Player1 {
     public void keyPressed(KeyEvent e){
         switch (e.getKeyCode()){
             case (KeyEvent.VK_LEFT):
-                Wx = -4;
+                Wx = -6;
                 break;
             case (KeyEvent.VK_RIGHT):
-                Wx = 4;
+                Wx = 6;
                 break;
+        }
+        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+            game.frame.setVisible(false);
+            game.frame.dispose();
+            new MainMenu();
         }
     }
 

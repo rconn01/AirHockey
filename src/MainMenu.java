@@ -58,13 +58,14 @@ public class MainMenu {
             JFrame rulesMenu = new JFrame("Rules");
             JButton ok = new JButton("OK");
             rulesMenu.setSize(Width, Height);
-            JTextArea text = new JTextArea("Double: Try to be the first to 7 points by having the puck hit\n              the other players side. \n\nSingle: Try score as many points by preventing the puck from\n             hitting the bottom.");
+            JTextArea text = new JTextArea("Double: Try to be the first to 7 points by having the puck hit\n              the other players side. \n\nSingle: Try to score as many points by preventing the puck from\n             hitting the bottom.");
             text.setFont(new Font("Arial", Font.PLAIN, 30));
             ok.setFont(new Font("Stencil", Font.PLAIN, 45));
             ok.setSize(menuWidth, menuHeight);
             ok.setLocation(330, 380);
             ok.addActionListener(a -> rulesMenu.setVisible(false));
             rulesMenu.add(ok);
+            rulesMenu.setLocationRelativeTo(null);
             rulesMenu.add(text);
             rulesMenu.setVisible(true);
         });

@@ -19,6 +19,8 @@ public class AirHockeyGame extends JPanel implements KeyListener{
     /** The puck being used to play. */
     private Puck puck;
 
+    JFrame frame;
+
     /** Determines if it is single or double player. */
     private char type;
 
@@ -130,7 +132,7 @@ public class AirHockeyGame extends JPanel implements KeyListener{
                 JOptionPane.showMessageDialog(this, "Player 1 score is: " + racketP1.theScore() + "\nPlayer 2 score is: " + racketP2.theScore(), "Game Over", JOptionPane.YES_NO_OPTION);
                 break;
             case 'S':
-                JOptionPane.showMessageDialog(this, "Players score is: " + racketP1.theScore() , "Game Over", JOptionPane.YES_NO_OPTION);
+                JOptionPane.showMessageDialog(this, "Player score is: " + racketP1.theScore() , "Game Over", JOptionPane.YES_NO_OPTION);
                 break;
         }
         System.exit(ABORT);
@@ -143,7 +145,7 @@ public class AirHockeyGame extends JPanel implements KeyListener{
      */
     public void start(){
         this.puck = new Puck(this);
-        JFrame frame = new JFrame("Air Hockey Game");
+        frame = new JFrame("Air Hockey Game");
         frame.setSize(500, 500);
         frame.setLocationRelativeTo(null);
         frame.add(this);
@@ -158,6 +160,7 @@ public class AirHockeyGame extends JPanel implements KeyListener{
             } catch (InterruptedException e) {}
         }
     }
+
 
     /**
      * Sets the coloring of the puck, and both paddles.

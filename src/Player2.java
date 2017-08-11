@@ -7,6 +7,7 @@
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 
 public class Player2 {
     /** Starting x location of the paddle */
@@ -67,11 +68,16 @@ public class Player2 {
     public void keyPressed(KeyEvent e){
         switch (e.getKeyCode()){
             case (KeyEvent.VK_A):
-                Wx = -4;
+                Wx = -6;
                 break;
             case (KeyEvent.VK_D):
-                Wx = 4;
+                Wx = 6;
                 break;
+        }
+        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+            game.frame.setVisible(false);
+            game.frame.dispose();
+            new MainMenu();
         }
     }
 
