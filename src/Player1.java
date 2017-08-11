@@ -81,6 +81,7 @@ public class Player1 {
         if(e.getKeyCode() == KeyEvent.VK_SPACE){
             game.frame.setVisible(false);
             game.frame.dispose();
+            System.exit(0);
             new MainMenu();
         }
     }
