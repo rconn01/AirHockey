@@ -142,6 +142,7 @@ public class AirHockeyGame extends JPanel implements KeyListener{
     public void start() {
         JFrame frame = new JFrame("Air Hockey Game");
         frame.setSize(500, 500);
+        frame.setLocationRelativeTo(null);
         this.puck = new Puck(this);
         frame.add(this);
         frame.setVisible(true);

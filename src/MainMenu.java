@@ -28,8 +28,7 @@ public class MainMenu {
         //Menu Variables
         Menu.setResizable(false);
         Menu.setSize(Width, Height);
-        //Menu.setLayout(null);
-        //Menu.setLocationRelativeTo(null);
+        Menu.setLocationRelativeTo(null);
         Menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Single Button
@@ -46,7 +45,6 @@ public class MainMenu {
         Double.setSize(menuWidth, menuHeight);
         Double.setLocation(338, menuY);
         Double.setFont(new Font("Stencil", Font.PLAIN, 45));
-        //Double.setBackground(Color.RED);
         Menu.add(Double);
         Double.addActionListener(e -> {
             new Thread(()-> new AirHockeyGame('D').start()).start();
@@ -57,7 +55,6 @@ public class MainMenu {
         Rules.setSize(menuWidth, menuHeight);
         Rules.setLocation(676,menuY);
         Rules.setFont(new Font("Stencil", Font.PLAIN, 45));
-        //Exit.setBackground(Color.BLUE);
         Menu.add(Rules);
         Rules.addActionListener(e -> {
             JFrame rulesMenu = new JFrame("Rules");
