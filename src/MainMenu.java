@@ -23,6 +23,7 @@ public class MainMenu {
      * Creates the main menu with 2 buttons and displays main rules
      */
     public MainMenu() {
+
         //Menu Variables
         Menu.setResizable(false);
         Menu.setSize(Width, Height);
