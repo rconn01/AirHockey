@@ -75,6 +75,7 @@ public class MainMenu {
         label.setLocation(5,5);
         label.setFont(new Font("Stencil", Font.ITALIC, 150));
         Menu.add(label);
+
         //Displays the menu
         Menu.setVisible(true);
 
