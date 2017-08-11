@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.ImageObserver;
-
 /**
  * Created on 8/5/17
  * Creates a main menu page before the game is actually played. Allows player to exit or play the game.
@@ -76,7 +74,7 @@ public class MainMenu {
         label.setLocation(5,5);
         label.setFont(new Font("Stencil", Font.ITALIC, 150));
         Menu.add(label);
-
+        //Displays the menu
         Menu.setVisible(true);
 
     }
