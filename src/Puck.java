@@ -16,7 +16,7 @@ public class Puck {
 
     /** x - initial x location of puck */
     /** y - initial y location of puck */
-    /** z - used to let hte puck go back down after hitting the top paddle */
+    /** z - used to let the puck go back down after hitting the top paddle */
     int x = 1, y = 1, z = 1;
 
     /** Changes the location of the puck every time it moves
@@ -27,8 +27,11 @@ public class Puck {
     /** WINNER is the number of goals required to win */
     private final int WINNER = 7;
 
-    /** the speed of the puck for the x and y directions */
+    /** The speed of the puck for the x and y directions */
     private int speed = 5;
+
+    /** The max speed possible. */
+    private final int SPEED_MAX = 10;
 
     /** player1 is the first player */
     private Player1 player1;
@@ -55,24 +58,24 @@ public class Puck {
         }
     }
 
-
     /**
      * Controls the pucks movements as it collides with the walls and the rackets.
      * '- DIAMETER' because want the edge of puck to hit wall not center. Changes location
      * of the puck constantly
      */
     public void move(){
-        //when it hits the left wall moves in positive direction (right)
-        if(x + Wx < 0)
-            Wx = speed;
-        //when it hits the right wall moves in negative direction (left)
-        else if(x + Wx > game.getWidth() - DIAMETER)
-            Wx = -speed;
+        //Rebounds the puck after it hits a side wall.
+        if(collideLeft() || collideRight())
+            Wx *= -1;
 
         switch (game.getType()){
             case 'S':
                 if(collideTop()) {
-                    Hy = 1;
+                    Hy = rand.nextInt(SPEED_MAX) + 1;
+                }
+                //when it hits the bottom the game ends
+                else if(collideBottom()) {
+                    game.gameOver();
                 }
                 break;
             //when it hits the top the game resets and player 1 gets a point
@@ -82,38 +85,29 @@ public class Puck {
                         game.gameOver();
                     game.restart(game);
                 }
+                //when it hits the bottom the game resets and player 2 gets a point
+                else if(collideBottom()) {
+                    if (player2.theScore() == WINNER)
+                        game.gameOver();
+                    game.restart(game);
+                }
+                //Sends the puck away from the paddle after collision changes speed randomly
+                //adds or subtracts.
+                if (collideP2()) {
+                    Hy = rand.nextInt(SPEED_MAX) + 1;
+                    z = player2.getBottomY() - DIAMETER;
+                    Wx += rand.nextInt(SPEED_MAX) + 1;
+                    speed = Wx;
+                }
                 break;
         }
-        //when it hits the bottom the game resets and player 2 gets a point
-        if(collideBottom()) {
-            if(player2.theScore() == WINNER)
-                game.gameOver();
-            game.restart(game);
-        }
-
-        //Sends the puck away from the paddle after collision changes speed randomly
-        //adds for player 2, subtracts for player 1.
-        if(game.getType() == 'D') {
-            if (collisionP2()) {
-                Hy = 1;
-                z = player2.getBottomY() - DIAMETER;
-                Wx += rand.nextInt(6);
-                speed = Wx;
-            }
-            if(collisionP1()){
-                Hy = -1;
-                y = player1.getTopY() - DIAMETER;
-                Wx -= rand.nextInt(6);
-                speed = Wx;
-            }
-        }
-        else if (collisionP1()){
-            Hy = -1;
+        //Rebound the puck if it collides with the first paddle.
+        if (collideP1()) {
+            Hy = -rand.nextInt(SPEED_MAX) - 1;
             y = player1.getTopY() - DIAMETER;
-            Wx -= rand.nextInt(5);
+            Wx -= rand.nextInt(SPEED_MAX) + 1;
             speed = Wx;
         }
-
         //changes the location of the puck
         x += Wx;
         y += Hy;
@@ -125,8 +119,8 @@ public class Puck {
      *
      * @return If the puck collides with the first players paddle.
      */
-    public boolean collisionP1(){
-        return game.puck.getBounds().intersects(player1.getBounds());
+    public boolean collideP1(){
+        return game.getPuck().getBounds().intersects(player1.getBounds());
     }
 
     /**
@@ -134,27 +128,8 @@ public class Puck {
      *
      * @return If the puck collides with the second players paddle.
      */
-    public boolean collisionP2(){
-        return game.puck.getBounds().intersects(player2.getBounds());
-    }
-
-    /**
-     * Returns the bounds of the puck based on where it is on board.
-     *
-     * @return A new Rectangle with dimensions x and y.
-     */
-    private Rectangle getBounds(){
-        return new Rectangle(x, y, DIAMETER, DIAMETER);
-    }
-
-    /**
-     * Tests to see if the puck has hit the bottom of the
-     * screen.
-     *
-     * @return A boolean of if it hit the bottom or not.
-     */
-    public boolean collideBottom(){
-        return y + Hy > game.getHeight() - DIAMETER;
+    public boolean collideP2(){
+        return game.getPuck().getBounds().intersects(player2.getBounds());
     }
 
     /**
@@ -164,7 +139,46 @@ public class Puck {
      * @return A boolean of if it has hit the top or not.
      */
     public boolean collideTop(){
-        return y == 0;
+        return y <= 0;
+    }
+
+    /**
+     * Tests to see if the puck has hit the left side of the
+     * screen.
+     *
+     * @return A boolean of if it has hit the left side or not.
+     */
+    public boolean collideLeft(){
+        return x + Wx <= 0;
+    }
+
+    /**
+     * Tests to see if the puck has hit the right side of the
+     * screen.
+     *
+     * @return A boolean of if it has hit the right side or not.
+     */
+    public boolean collideRight(){
+        return x + Wx >= game.getWidth() - DIAMETER;
+    }
+
+    /**
+     * Tests to see if the puck has hit the bottom of the
+     * screen.
+     *
+     * @return A boolean of if it hit the bottom or not.
+     */
+    public boolean collideBottom(){
+        return y + Hy >= game.getHeight() - DIAMETER;
+    }
+
+    /**
+     * Returns the bounds of the puck based on where it is on board.
+     *
+     * @return A new Rectangle with dimensions x and y.
+     */
+    private Rectangle getBounds(){
+        return new Rectangle(x, y, DIAMETER, DIAMETER);
     }
 
     /**
