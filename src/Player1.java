@@ -77,12 +77,12 @@ public class Player1 {
             case (KeyEvent.VK_RIGHT):
                 Wx = 6;
                 break;
-        }
-        if(e.getKeyCode() == KeyEvent.VK_SPACE){
-            game.frame.setVisible(false);
-            game.frame.dispose();
-            System.exit(0);
-            new MainMenu();
+            case (KeyEvent.VK_SPACE):
+                game.frame.setVisible(false);
+                game.frame.dispose();
+                game.getPuck().stopPuck();
+                new MainMenu();
+                break;
         }
     }
 

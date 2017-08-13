@@ -27,9 +27,6 @@ public class Puck {
     /** WINNER is the number of goals required to win */
     private final int WINNER = 7;
 
-    /** The speed of the puck for the x and y directions */
-    private int speed = 5;
-
     /** The max speed possible. */
     private final int SPEED_MAX = 10;
 
@@ -97,7 +94,6 @@ public class Puck {
                     Hy = rand.nextInt(SPEED_MAX) + 1;
                     z = player2.getBottomY() - DIAMETER;
                     Wx += rand.nextInt(SPEED_MAX) + 1;
-                    speed = Wx;
                 }
                 break;
         }
@@ -106,12 +102,16 @@ public class Puck {
             Hy = -rand.nextInt(SPEED_MAX) - 1;
             y = player1.getTopY() - DIAMETER;
             Wx -= rand.nextInt(SPEED_MAX) + 1;
-            speed = Wx;
         }
         //changes the location of the puck
         x += Wx;
         y += Hy;
         z += Z;
+    }
+
+    public void stopPuck(){
+        Wx = 0;
+        Hy = 0;
     }
 
     /**

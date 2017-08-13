@@ -59,6 +59,7 @@ public class Player2 {
             X = X + Wx;
     }
 
+    
     /**
      * Determines which key was pressed and set the direction
      * of the movement.
@@ -73,14 +74,16 @@ public class Player2 {
             case (KeyEvent.VK_D):
                 Wx = 6;
                 break;
-        }
-        if(e.getKeyCode() == KeyEvent.VK_SPACE){
-            game.frame.setVisible(false);
-            game.frame.dispose();
-            System.exit(0);
-            new MainMenu();
+            case (KeyEvent.VK_SPACE):
+                game.frame.setVisible(false);
+                game.frame.dispose();
+                game.getPuck().stopPuck();
+                new MainMenu();
+                break;
         }
     }
+
+
 
     /**
      * When the key is released it sets the movement speed

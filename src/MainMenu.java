@@ -59,7 +59,10 @@ public class MainMenu {
             JFrame rulesMenu = new JFrame("Rules");
             JButton ok = new JButton("OK");
             rulesMenu.setSize(Width, Height);
-            JTextArea text = new JTextArea("Double: Try to be the first to 7 points by having the puck hit\n              the other players side. \n\nSingle: Try to score as many points by preventing the puck from\n             hitting the bottom.");
+            JTextArea text = new JTextArea("Double: Try to be the first to 7 points by having the puck hit\n  " +
+                    "            the other players side. \n\nSingle: Try to score as many points by preventing the " +
+                    "puck " + "from\n             hitting the bottom. \n\nTo return to the main menu during the game " +
+                    "press the spacebar.");
             text.setFont(new Font("Arial", Font.PLAIN, 30));
             ok.setFont(new Font("Stencil", Font.PLAIN, 45));
             ok.setSize(menuWidth, menuHeight);
