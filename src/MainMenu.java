@@ -43,11 +43,10 @@ public class MainMenu {
         Single.setFont(new Font("Stencil", Font.PLAIN, 45));
         Menu.add(Single);
 
-        Single.addActionListener(e -> { try {
-            new Thread(() -> newGame('S')).start();
+        Single.addActionListener(e -> {
+      	  	Runnable r = () -> { try {newGame('S');} catch (Exception e1) {}};
+            new Thread(r).start();
             Menu.setVisible(false);
-        }
-        catch (FileNotFoundException ex){}
         });
 
 
@@ -57,8 +56,9 @@ public class MainMenu {
         Double.setLocation(338, menuY);
         Double.setFont(new Font("Stencil", Font.PLAIN, 45));
         Menu.add(Double);
-        Double.addActionListener(e -> {
-            new Thread(()-> new AirHockeyGame('D').start()).start();
+        Double.addActionListener(e -> { 
+      	  	Runnable r = () ->{ try {new AirHockeyGame('D').start(); } catch (Exception e1) {}};
+            new Thread(r).start();
             Menu.setVisible(false);
         });
 
