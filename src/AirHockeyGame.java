@@ -10,6 +10,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.FileNotFoundException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -19,6 +20,7 @@ public class AirHockeyGame extends JPanel implements KeyListener{
     /** The puck being used to play. */
     private Puck puck;
 
+    /** Creates the game screen. */
     JFrame frame;
 
     /** Determines if it is single or double player. */
@@ -94,7 +96,7 @@ public class AirHockeyGame extends JPanel implements KeyListener{
     /**
      * Creates the game and sets the listeners and the focuses.
      */
-    public AirHockeyGame(char c){
+    public AirHockeyGame(char c) throws FileNotFoundException{
         addKeyListener(this);
         setFocusable(true);
         this.type = c;
@@ -103,7 +105,7 @@ public class AirHockeyGame extends JPanel implements KeyListener{
     /**
      * Starts both paddles and the puck moving.
      */
-    public void gameMoves(){
+    public void gameMoves() throws FileNotFoundException{
         racketP1.move();
         if(getType() == 'D'){
             racketP2.move();
@@ -117,7 +119,7 @@ public class AirHockeyGame extends JPanel implements KeyListener{
      *
      * @param game The game being played.
      */
-    public void restart(AirHockeyGame game){
+    public void restart(AirHockeyGame game)throws FileNotFoundException{
         puck = new Puck(game);
     }
 
@@ -143,7 +145,7 @@ public class AirHockeyGame extends JPanel implements KeyListener{
      * Continuously repaints the game board while puck and paddles move around.
      * @throws InterruptedException for the thread that is running
      */
-    public void start(){
+    public void start() throws FileNotFoundException{
         this.puck = new Puck(this);
         frame = new JFrame("Air Hockey Game");
         frame.setSize(500, 500);

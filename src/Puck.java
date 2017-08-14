@@ -8,6 +8,7 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.io.*;
 import java.util.Random;
 
 public class Puck {
@@ -60,7 +61,7 @@ public class Puck {
      * '- DIAMETER' because want the edge of puck to hit wall not center. Changes location
      * of the puck constantly
      */
-    public void move(){
+    public void move() throws FileNotFoundException{
         //Rebounds the puck after it hits a side wall.
         if(collideLeft() || collideRight())
             Wx *= -1;
@@ -72,20 +73,25 @@ public class Puck {
                 }
                 //when it hits the bottom the game ends
                 else if(collideBottom()) {
+                    LeaderBoard leaderBoard = new LeaderBoard(player1.theScore());
+                    try{leaderBoard.wait(10000);}
+                    catch (InterruptedException e){}
                     game.gameOver();
                 }
                 break;
             //when it hits the top the game resets and player 1 gets a point
             case 'D':
                 if(collideTop()) {
-                    if(player1.theScore() == WINNER)
+                    if(player1.theScore() == WINNER) {
                         game.gameOver();
+                    }
                     game.restart(game);
                 }
                 //when it hits the bottom the game resets and player 2 gets a point
                 else if(collideBottom()) {
-                    if (player2.theScore() == WINNER)
+                    if (player2.theScore() == WINNER) {
                         game.gameOver();
+                    }
                     game.restart(game);
                 }
                 //Sends the puck away from the paddle after collision changes speed randomly

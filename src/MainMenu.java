@@ -1,7 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
+
 /**
  * Created on 8/5/17
+ *
  * Creates a main menu page before the game is actually played. Allows player to exit or play the game.
  */
 public class MainMenu {
@@ -19,10 +22,14 @@ public class MainMenu {
     int Width = 1000;
     int Height = 600;
 
+    private void newGame(char c) throws FileNotFoundException{
+        new AirHockeyGame(c).start();
+    }
+
     /**
      * Creates the main menu with 2 buttons and displays main rules
      */
-    public MainMenu() {
+    public MainMenu(){
 
         //Menu Variables
         Menu.setResizable(false);
@@ -35,10 +42,15 @@ public class MainMenu {
         Single.setLocation(0,menuY);
         Single.setFont(new Font("Stencil", Font.PLAIN, 45));
         Menu.add(Single);
-        Single.addActionListener(e -> {
-                    new Thread(() -> new AirHockeyGame('S').start()).start();
-                    Menu.setVisible(false);
-                });
+
+        Single.addActionListener(e -> { try {
+            new Thread(() -> newGame('S')).start();
+            Menu.setVisible(false);
+        }
+        catch (FileNotFoundException ex){}
+        });
+
+
 
         //Double Button
         Double.setSize(menuWidth, menuHeight);
